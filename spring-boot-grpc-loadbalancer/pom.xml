@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>com.xcbeyond.springboot.grpc</groupId>
 		<artifactId>spring-boot-grpc</artifactId>
@@ -11,7 +12,7 @@
 	<groupId>com.xcbeyond.springboot.grpc.loadbalancer</groupId>
 	<artifactId>spring-boot-grpc-loadbalancer</artifactId>
 	<version>1.0</version>
-	<name>spring-boot-grpc-loadbalancer</name>
+	<name>spring-boot-grpc-client</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.loadbalancer;
+package com.xcbeyond.springboot.grpc.loadbalancer.roundrobin;
 
 /**
  * @ClassName: Ref

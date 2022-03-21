@@ -1,1 +1,1 @@
-com.xcbeyond.springboot.grpc.loadbalancer.CustomLoadBalancerProvider
+com.xcbeyond.springboot.grpc.loadbalancer.roundrobin.CustomLoadBalancerProvider

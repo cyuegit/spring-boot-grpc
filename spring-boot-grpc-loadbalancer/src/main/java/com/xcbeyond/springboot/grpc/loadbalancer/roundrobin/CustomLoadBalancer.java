@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.loadbalancer;
+package com.xcbeyond.springboot.grpc.loadbalancer.roundrobin;
 
 import io.grpc.*;
 import lombok.extern.slf4j.Slf4j;

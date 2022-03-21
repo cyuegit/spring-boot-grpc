@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.loadbalancer;
+package com.xcbeyond.springboot.grpc.loadbalancer.roundrobin;
 
 import io.grpc.ConnectivityState;
 import io.grpc.ConnectivityStateInfo;
