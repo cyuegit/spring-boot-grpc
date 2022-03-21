@@ -25,6 +25,7 @@ grpc:
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext
+      # 系统自带，随机
 #      defaultLoadBalancingPolicy: round_robin
 #      defaultLoadBalancingPolicy: pick_first
       defaultLoadBalancingPolicy: custom_round_robin

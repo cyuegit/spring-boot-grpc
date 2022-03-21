@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.client.grpc.loadbalancer;
+package com.xcbeyond.springboot.grpc.loadbalancer;
 
 import io.grpc.ConnectivityState;
 import io.grpc.ConnectivityStateInfo;
@@ -8,8 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.xcbeyond.springboot.grpc.client.grpc.loadbalancer.CustomLoadBalancer.STATE_INFO;
 import static io.grpc.ConnectivityState.CONNECTING;
 import static io.grpc.ConnectivityState.IDLE;
 import static io.grpc.ConnectivityState.READY;
@@ -38,7 +36,7 @@ class CustomSubchannelStateListener implements LoadBalancer.SubchannelStateListe
 
     @Override
     public void onSubchannelState(ConnectivityStateInfo stateInfo) {
-        Ref<ConnectivityState> stateInfoRef = subchannel.getAttributes().get(STATE_INFO);
+        Ref<ConnectivityState> stateInfoRef = subchannel.getAttributes().get(CustomLoadBalancer.STATE_INFO);
         ConnectivityState currentState = stateInfoRef.getValue();
         ConnectivityState newState = stateInfo.getState();
 
@@ -68,7 +66,7 @@ class CustomSubchannelStateListener implements LoadBalancer.SubchannelStateListe
         List<LoadBalancer.Subchannel> readySubchannels = loadBalancer.getSubchannelMap()
                 .values()
                 .stream()
-                .filter(s -> s.getAttributes().get(STATE_INFO).getValue() == READY)
+                .filter(s -> s.getAttributes().get(CustomLoadBalancer.STATE_INFO).getValue() == READY)
                 .collect(Collectors.toList());
 
         if (readySubchannels.isEmpty()) {

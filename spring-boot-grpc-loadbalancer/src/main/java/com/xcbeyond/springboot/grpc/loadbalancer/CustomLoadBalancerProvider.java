@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.client.grpc.loadbalancer;
+package com.xcbeyond.springboot.grpc.loadbalancer;
 
 import io.grpc.LoadBalancer;
 import io.grpc.LoadBalancerProvider;
@@ -18,7 +18,7 @@ public class CustomLoadBalancerProvider extends LoadBalancerProvider {
 
     @Override
     public int getPriority() {
-        return 10;
+        return 5;
     }
 
     @Override

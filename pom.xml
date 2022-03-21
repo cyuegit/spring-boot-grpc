@@ -23,6 +23,7 @@
 		<module>spring-boot-grpc-common</module>
 		<module>spring-boot-grpc-server</module>
         <module>spring-boot-grpc-client</module>
+		<module>spring-boot-grpc-loadbalancer</module>
 		<!--<module>spring-boot-eureka-server</module>-->
 	</modules>
 

@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.client.grpc.loadbalancer;
+package com.xcbeyond.springboot.grpc.loadbalancer;
 
 /**
  * @ClassName: Ref
