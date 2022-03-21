@@ -3,3 +3,4 @@
 /spring-boot-grpc-client/target/
 /spring-boot-grpc-common/target/
 /spring-boot-grpc-server/target/
+/.idea/
