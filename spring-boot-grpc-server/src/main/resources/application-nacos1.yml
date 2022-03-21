@@ -1,0 +1,24 @@
+grpc:
+  server:
+    port: 1046
+server:
+  port: 2390
+
+logging:
+  level:
+    root: info
+
+spring:
+  application:
+    name: spring-boot-grpc-server
+  cloud:
+    nacos:
+      discovery:
+        register-enabled: true
+        server-addr: 192.168.186.128:8848
+        group: demo
+#        weight: 1
+        cluster-name: shanghai
+
+
+

@@ -1,0 +1,30 @@
+grpc:
+  server:
+    port: 1047
+server:
+  port: 2391
+
+logging:
+  level:
+    root: info
+
+spring:
+  application:
+    name: spring-boot-grpc-server
+  cloud:
+    nacos:
+      discovery:
+        register-enabled: true
+        server-addr: 192.168.186.128:8848
+        group: demo
+#        weight: 5
+        cluster-name: beijing
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/

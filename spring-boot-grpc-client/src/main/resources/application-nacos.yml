@@ -1,0 +1,35 @@
+server:
+  port: 30000
+spring:
+  application:
+    name: spring-boot-grpc-client
+
+  #eureka:
+  #  instance:
+  #    prefer-ip-address: true
+  #  client:
+  #    register-with-eureka: true
+  #    fetch-registry: true
+  #    service-url:
+  #      defaultZone: http://localhost:8761/eureka/
+  cloud:
+    nacos:
+      discovery:
+        register-enabled: false
+        server-addr: 192.168.186.128:8848
+        group: demo
+        cluster-name: shanghai
+grpc:
+  client:
+    spring-boot-grpc-server:
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+#      defaultLoadBalancingPolicy: round_robin
+#      defaultLoadBalancingPolicy: pick_first
+      defaultLoadBalancingPolicy: custom_round_robin
+
+
+logging:
+  level:
+    root: info
