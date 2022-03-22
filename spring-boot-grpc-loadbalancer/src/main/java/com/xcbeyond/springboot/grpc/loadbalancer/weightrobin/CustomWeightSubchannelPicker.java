@@ -1,10 +1,14 @@
 package com.xcbeyond.springboot.grpc.loadbalancer.weightrobin;
 
+import cn.hutool.*;
+import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.json.JSONUtil;
 import io.grpc.LoadBalancer;
 import lombok.extern.slf4j.Slf4j;
-import java.lang.reflect.Field;
+
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.lang.reflect.Field;
 
 /**
  * @ClassName: CustomRoundSubchannelPicker
@@ -44,15 +48,14 @@ class CustomWeightSubchannelPicker extends LoadBalancer.SubchannelPicker {
         if (index.get() >= subchannelList.size()) {
             index.set(0);
         }
-
         LoadBalancer.Subchannel subchannel = subchannelList.get(index.getAndIncrement());
         try {
-            Filed outerField = subchannel.getClass().getDeclaredField("this$0");
-            //this$0是私有的,提升访问权限
-            outerField.setAccessible(true);
-            LoadBalancer.Subchannel o = (LoadBalancer.Subchannel)outerField.get(subchannel);
+            Object fefobj = ReflectUtil.getFieldValue(subchannel, "this$0");
+            Object nameResolver = ReflectUtil.getFieldValue(fefobj, "nameResolver");
+            Object instanceList = ReflectUtil.getFieldValue(nameResolver, "instanceList");
+            System.out.println(JSONUtil.toJsonStr(instanceList));
         } catch (Exception e) {
-            log.info("custom_weight_robin nextSubchannel:{}", subchannel);
+            log.error("custom_weight_robin nextSubchannel:{}", subchannel);
             e.printStackTrace();
         }
         log.info("返回 Subchannel:{}", subchannel);

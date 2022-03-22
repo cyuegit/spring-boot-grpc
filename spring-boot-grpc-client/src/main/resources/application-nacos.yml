@@ -20,6 +20,8 @@ spring:
         group: demo
         cluster-name: shanghai
 grpc:
+#  server:
+#    port: 9099
   client:
     spring-boot-grpc-server:
       enableKeepAlive: true
