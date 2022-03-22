@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @ClassName: CustomSubchannelPicker
+ * @ClassName: CustomRoundSubchannelPicker
  * @Description:
  * @Author: chenglong.yue
  * @Date: 2022/3/20 21:06
  */
 @Slf4j
-class CustomSubchannelPicker extends LoadBalancer.SubchannelPicker {
+class CustomRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     private final AtomicInteger index = new AtomicInteger();
 
@@ -21,11 +21,11 @@ class CustomSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     private LoadBalancer.PickResult pickResult;
 
-    public CustomSubchannelPicker(LoadBalancer.PickResult pickResult) {
+    public CustomRoundSubchannelPicker(LoadBalancer.PickResult pickResult) {
         this.pickResult = pickResult;
     }
 
-    public CustomSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
+    public CustomRoundSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
         this.subchannelList = subchannelList;
     }
 

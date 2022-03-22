@@ -1,15 +1,15 @@
-package com.xcbeyond.springboot.grpc.loadbalancer.roundrobin;
+package com.xcbeyond.springboot.grpc.loadbalancer.weightrobin;
 
 /**
- * @ClassName: Ref
+ * @ClassName: CustomRoundRef
  * @Description:
  * @Author: chenglong.yue
  * @Date: 2022/3/20 21:07
  */
-final class Ref<T> {
+final class CustomWeightRef<T> {
     T value;
 
-    Ref(T value) {
+    CustomWeightRef(T value) {
         this.value = value;
     }
 

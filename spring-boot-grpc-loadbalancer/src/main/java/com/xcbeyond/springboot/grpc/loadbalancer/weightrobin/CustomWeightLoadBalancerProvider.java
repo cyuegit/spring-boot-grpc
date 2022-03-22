@@ -1,15 +1,15 @@
-package com.xcbeyond.springboot.grpc.loadbalancer.roundrobin;
+package com.xcbeyond.springboot.grpc.loadbalancer.weightrobin;
 
 import io.grpc.LoadBalancer;
 import io.grpc.LoadBalancerProvider;
 
 /**
- * @ClassName: CustomLoadBalancerProvider
+ * @ClassName: CustomRoundLoadBalancerProvider
  * @Description:
  * @Author: chenglong.yue
  * @Date: 2022/3/20 20:56
  */
-public class CustomLoadBalancerProvider extends LoadBalancerProvider {
+public class CustomWeightLoadBalancerProvider extends LoadBalancerProvider {
 
     @Override
     public boolean isAvailable() {
@@ -23,12 +23,12 @@ public class CustomLoadBalancerProvider extends LoadBalancerProvider {
 
     @Override
     public String getPolicyName() {
-        return "custom_round_robin";
+        return "custom_weight_robin";
     }
 
     @Override
     public LoadBalancer newLoadBalancer(LoadBalancer.Helper helper) {
-        return new CustomLoadBalancer(helper);
+        return new CustomWeightLoadBalancer(helper);
     }
 }
 

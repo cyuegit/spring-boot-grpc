@@ -12,7 +12,7 @@
 	<groupId>com.xcbeyond.springboot.grpc.loadbalancer</groupId>
 	<artifactId>spring-boot-grpc-loadbalancer</artifactId>
 	<version>1.0</version>
-	<name>spring-boot-grpc-client</name>
+	<name>spring-boot-grpc-loadbalancer</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

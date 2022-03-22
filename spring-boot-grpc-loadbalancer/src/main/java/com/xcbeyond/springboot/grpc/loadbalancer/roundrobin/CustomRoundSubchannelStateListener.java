@@ -15,20 +15,20 @@ import static io.grpc.ConnectivityState.SHUTDOWN;
 import static io.grpc.ConnectivityState.TRANSIENT_FAILURE;
 
 /**
- * @ClassName: CustomSubchannelStateListener
+ * @ClassName: CustomRoundSubchannelStateListener
  * @Description:
  * @Author: chenglong.yue
  * @Date: 2022/3/20 21:05
  */
 @Slf4j
-class CustomSubchannelStateListener implements LoadBalancer.SubchannelStateListener {
+class CustomRoundSubchannelStateListener implements LoadBalancer.SubchannelStateListener {
     private final LoadBalancer.Subchannel subchannel;
     private final LoadBalancer.Helper helper;
-    private final CustomLoadBalancer loadBalancer;
+    private final CustomRoundLoadBalancer loadBalancer;
 
-    public CustomSubchannelStateListener(CustomLoadBalancer customLoadBalancer,
-                                         LoadBalancer.Subchannel subchannel,
-                                         LoadBalancer.Helper helper) {
+    public CustomRoundSubchannelStateListener(CustomRoundLoadBalancer customLoadBalancer,
+                                              LoadBalancer.Subchannel subchannel,
+                                              LoadBalancer.Helper helper) {
         this.loadBalancer = customLoadBalancer;
         this.subchannel = subchannel;
         this.helper = helper;
@@ -36,7 +36,7 @@ class CustomSubchannelStateListener implements LoadBalancer.SubchannelStateListe
 
     @Override
     public void onSubchannelState(ConnectivityStateInfo stateInfo) {
-        Ref<ConnectivityState> stateInfoRef = subchannel.getAttributes().get(CustomLoadBalancer.STATE_INFO);
+        CustomRoundRef<ConnectivityState> stateInfoRef = subchannel.getAttributes().get(CustomRoundLoadBalancer.STATE_INFO);
         ConnectivityState currentState = stateInfoRef.getValue();
         ConnectivityState newState = stateInfo.getState();
 
@@ -66,15 +66,15 @@ class CustomSubchannelStateListener implements LoadBalancer.SubchannelStateListe
         List<LoadBalancer.Subchannel> readySubchannels = loadBalancer.getSubchannelMap()
                 .values()
                 .stream()
-                .filter(s -> s.getAttributes().get(CustomLoadBalancer.STATE_INFO).getValue() == READY)
+                .filter(s -> s.getAttributes().get(CustomRoundLoadBalancer.STATE_INFO).getValue() == READY)
                 .collect(Collectors.toList());
 
         if (readySubchannels.isEmpty()) {
             log.info("更新 LB 状态为 CONNECTING，没有 READY 的 Subchannel");
-            helper.updateBalancingState(CONNECTING, new CustomSubchannelPicker(LoadBalancer.PickResult.withNoResult()));
+            helper.updateBalancingState(CONNECTING, new CustomRoundSubchannelPicker(LoadBalancer.PickResult.withNoResult()));
         } else {
             log.info("更新 LB 状态为 READY，Subchannel 为:{}", readySubchannels.toArray());
-            helper.updateBalancingState(READY, new CustomSubchannelPicker(readySubchannels));
+            helper.updateBalancingState(READY, new CustomRoundSubchannelPicker(readySubchannels));
         }
     }
 }
