@@ -45,9 +45,7 @@ class CustomRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
         if (index.get() >= subchannelList.size()) {
             index.set(0);
         }
-
         LoadBalancer.Subchannel subchannel = subchannelList.get(index.getAndIncrement());
-
         log.info("返回 Subchannel:{}", subchannel);
         return LoadBalancer.PickResult.withSubchannel(subchannel);
     }
