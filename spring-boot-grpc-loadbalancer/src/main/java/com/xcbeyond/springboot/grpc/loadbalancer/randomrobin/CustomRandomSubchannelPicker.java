@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.loadbalancer.roundrobin;
+package com.xcbeyond.springboot.grpc.loadbalancer.randomrobin;
 
 import io.grpc.LoadBalancer;
 import lombok.extern.slf4j.Slf4j;
@@ -8,13 +8,13 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @ClassName: CustomRoundSubchannelPicker
+ * @ClassName: CustomRandomSubchannelPicker
  * @Description:
  * @Author: chenglong.yue
  * @Date: 2022/3/20 21:06
  */
 @Slf4j
-class CustomRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
+class CustomRandomSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     private final AtomicInteger index = new AtomicInteger();
 
@@ -22,11 +22,11 @@ class CustomRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     private LoadBalancer.PickResult pickResult;
 
-    public CustomRoundSubchannelPicker(LoadBalancer.PickResult pickResult) {
+    public CustomRandomSubchannelPicker(LoadBalancer.PickResult pickResult) {
         this.pickResult = pickResult;
     }
 
-    public CustomRoundSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
+    public CustomRandomSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
         this.subchannelList = subchannelList;
     }
 
@@ -42,12 +42,12 @@ class CustomRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
     }
 
     private LoadBalancer.PickResult nextSubchannel(LoadBalancer.PickSubchannelArgs args) {
-        if (index.get() >= subchannelList.size()) {
-            index.set(0);
+        // com.alibaba.nacos.client.naming.utils.Chooser 参考 ThreadLocalRandom.current().nextInt(10)
+        if (subchannelList.size() == 1) {
+            return LoadBalancer.PickResult.withSubchannel(subchannelList.get(0));
         }
-
-        LoadBalancer.Subchannel subchannel = subchannelList.get(index.getAndIncrement());
-
+        int pos = ThreadLocalRandom.current().nextInt(subchannelList.size());
+        LoadBalancer.Subchannel subchannel = subchannelList.get(pos);
         log.info("返回 Subchannel:{}", subchannel);
         return LoadBalancer.PickResult.withSubchannel(subchannel);
     }

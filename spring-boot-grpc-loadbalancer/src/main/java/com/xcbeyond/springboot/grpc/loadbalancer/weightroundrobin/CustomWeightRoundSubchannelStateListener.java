@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.loadbalancer.weightrobin;
+package com.xcbeyond.springboot.grpc.loadbalancer.weightroundrobin;
 
 import io.grpc.ConnectivityState;
 import io.grpc.ConnectivityStateInfo;
@@ -11,20 +11,20 @@ import java.util.stream.Collectors;
 import static io.grpc.ConnectivityState.*;
 
 /**
- * @ClassName: CustomRoundSubchannelStateListener
+ * @ClassName: CustomWeightRoundSubchannelStateListener
  * @Description:
  * @Author: chenglong.yue
  * @Date: 2022/3/20 21:05
  */
 @Slf4j
-class CustomWeightSubchannelStateListener implements LoadBalancer.SubchannelStateListener {
+class CustomWeightRoundSubchannelStateListener implements LoadBalancer.SubchannelStateListener {
     private final LoadBalancer.Subchannel subchannel;
     private final LoadBalancer.Helper helper;
-    private final CustomWeightLoadBalancer loadBalancer;
+    private final CustomWeightRoundLoadBalancer loadBalancer;
 
-    public CustomWeightSubchannelStateListener(CustomWeightLoadBalancer customLoadBalancer,
-                                               LoadBalancer.Subchannel subchannel,
-                                               LoadBalancer.Helper helper) {
+    public CustomWeightRoundSubchannelStateListener(CustomWeightRoundLoadBalancer customLoadBalancer,
+                                                    LoadBalancer.Subchannel subchannel,
+                                                    LoadBalancer.Helper helper) {
         this.loadBalancer = customLoadBalancer;
         this.subchannel = subchannel;
         this.helper = helper;
@@ -32,7 +32,7 @@ class CustomWeightSubchannelStateListener implements LoadBalancer.SubchannelStat
 
     @Override
     public void onSubchannelState(ConnectivityStateInfo stateInfo) {
-        CustomWeightRef<ConnectivityState> stateInfoRef = subchannel.getAttributes().get(CustomWeightLoadBalancer.STATE_INFO);
+        CustomWeightRoundRef<ConnectivityState> stateInfoRef = subchannel.getAttributes().get(CustomWeightRoundLoadBalancer.STATE_INFO);
         ConnectivityState currentState = stateInfoRef.getValue();
         ConnectivityState newState = stateInfo.getState();
 
@@ -62,15 +62,15 @@ class CustomWeightSubchannelStateListener implements LoadBalancer.SubchannelStat
         List<LoadBalancer.Subchannel> readySubchannels = loadBalancer.getSubchannelMap()
                 .values()
                 .stream()
-                .filter(s -> s.getAttributes().get(CustomWeightLoadBalancer.STATE_INFO).getValue() == READY)
+                .filter(s -> s.getAttributes().get(CustomWeightRoundLoadBalancer.STATE_INFO).getValue() == READY)
                 .collect(Collectors.toList());
 
         if (readySubchannels.isEmpty()) {
             log.info("更新 LB 状态为 CONNECTING，没有 READY 的 Subchannel");
-            helper.updateBalancingState(CONNECTING, new CustomWeightSubchannelPicker(LoadBalancer.PickResult.withNoResult()));
+            helper.updateBalancingState(CONNECTING, new CustomWeightRoundSubchannelPicker(LoadBalancer.PickResult.withNoResult()));
         } else {
             log.info("更新 LB 状态为 READY，Subchannel 为:{}", readySubchannels.toArray());
-            helper.updateBalancingState(READY, new CustomWeightSubchannelPicker(readySubchannels));
+            helper.updateBalancingState(READY, new CustomWeightRoundSubchannelPicker(readySubchannels));
         }
     }
 }

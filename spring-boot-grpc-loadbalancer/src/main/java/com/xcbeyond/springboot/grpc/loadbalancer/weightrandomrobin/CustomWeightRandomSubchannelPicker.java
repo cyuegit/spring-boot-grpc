@@ -1,23 +1,23 @@
-package com.xcbeyond.springboot.grpc.loadbalancer.weightrobin;
+package com.xcbeyond.springboot.grpc.loadbalancer.weightrandomrobin;
 
-import cn.hutool.*;
 import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import io.grpc.LoadBalancer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.lang.reflect.Field;
 
 /**
- * @ClassName: CustomRoundSubchannelPicker
+ * @ClassName: CustomWeightRandomSubchannelPicker
  * @Description:
  * @Author: chenglong.yue
  * @Date: 2022/3/20 21:06
  */
 @Slf4j
-class CustomWeightSubchannelPicker extends LoadBalancer.SubchannelPicker {
+class CustomWeightRandomSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     private final AtomicInteger index = new AtomicInteger();
 
@@ -25,12 +25,15 @@ class CustomWeightSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     private LoadBalancer.PickResult pickResult;
 
-    public CustomWeightSubchannelPicker(LoadBalancer.PickResult pickResult) {
+    private Map<String, LoadBalancer.Subchannel> subchannelMap;
+
+    public CustomWeightRandomSubchannelPicker(LoadBalancer.PickResult pickResult) {
         this.pickResult = pickResult;
     }
 
-    public CustomWeightSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
+    public CustomWeightRandomSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
         this.subchannelList = subchannelList;
+        //TODO 更新subchannelMap
     }
 
     @Override
@@ -45,21 +48,18 @@ class CustomWeightSubchannelPicker extends LoadBalancer.SubchannelPicker {
     }
 
     private LoadBalancer.PickResult nextSubchannel(LoadBalancer.PickSubchannelArgs args) {
-        if (index.get() >= subchannelList.size()) {
-            index.set(0);
-        }
-        LoadBalancer.Subchannel subchannel = subchannelList.get(index.getAndIncrement());
+        LoadBalancer.Subchannel first = subchannelList.get(0);
         try {
-            Object fefobj = ReflectUtil.getFieldValue(subchannel, "this$0");
+            Object fefobj = ReflectUtil.getFieldValue(first, "this$0");
             Object nameResolver = ReflectUtil.getFieldValue(fefobj, "nameResolver");
-            Object instanceList = ReflectUtil.getFieldValue(nameResolver, "instanceList");
-            System.out.println(JSONUtil.toJsonStr(instanceList));
+            JSONArray instanceList = (JSONArray)ReflectUtil.getFieldValue(nameResolver, "instanceList");
+            log.info("nacos instanceList:{}", JSONUtil.toJsonStr(instanceList));
         } catch (Exception e) {
-            log.error("custom_weight_robin nextSubchannel:{}", subchannel);
+            log.error("custom_weight_robin nextSubchannel:{}", first);
             e.printStackTrace();
         }
-        log.info("返回 Subchannel:{}", subchannel);
-        return LoadBalancer.PickResult.withSubchannel(subchannel);
+        log.info("返回 Subchannel:{}", first);
+        return LoadBalancer.PickResult.withSubchannel(first);
     }
 }
 

@@ -4,10 +4,6 @@ grpc:
 server:
   port: 5390
 
-logging:
-  level:
-    root: info
-
 spring:
   application:
     name: spring-boot-grpc-server
@@ -20,5 +16,7 @@ spring:
 #        weight: 1
         cluster-name: shanghai
 
-
+logging:
+  level:
+    root: info
 

@@ -1,4 +1,4 @@
-package com.xcbeyond.springboot.grpc.loadbalancer.weightrobin;
+package com.xcbeyond.springboot.grpc.loadbalancer.weightroundrobin;
 
 import io.grpc.*;
 import lombok.extern.slf4j.Slf4j;
@@ -13,21 +13,21 @@ import java.util.stream.Stream;
 import static io.grpc.ConnectivityState.IDLE;
 
 /**
- * @ClassName: CustomRoundLoadBalancer
- * @Description:
+ * @ClassName: CustomWeightRoundLoadBalancer
+ * @Description: 权重轮询
  * @Author: chenglong.yue
  * @Date: 2022/3/20 20:59
  */
 @Slf4j
-public class CustomWeightLoadBalancer extends LoadBalancer {
+public class CustomWeightRoundLoadBalancer extends LoadBalancer {
 
-    public static final Attributes.Key<CustomWeightRef<ConnectivityState>> STATE_INFO = Attributes.Key.create("state-info");
+    public static final Attributes.Key<CustomWeightRoundRef<ConnectivityState>> STATE_INFO = Attributes.Key.create("state-info");
 
     private final Helper helper;
 
     Map<EquivalentAddressGroup, Subchannel> subchannelMap = new ConcurrentHashMap<>();
 
-    public CustomWeightLoadBalancer(Helper helper) {
+    public CustomWeightRoundLoadBalancer(Helper helper) {
         this.helper = helper;
     }
 
@@ -72,7 +72,7 @@ public class CustomWeightLoadBalancer extends LoadBalancer {
         return CreateSubchannelArgs.newBuilder()
                 .setAddresses(e)
                 .setAttributes(Attributes.newBuilder()
-                        .set(STATE_INFO, new CustomWeightRef<>(IDLE))
+                        .set(STATE_INFO, new CustomWeightRoundRef<>(IDLE))
                         .build())
                 .build();
     }
@@ -90,7 +90,7 @@ public class CustomWeightLoadBalancer extends LoadBalancer {
             return subchannel;
         }
 
-        subchannel.start(new CustomWeightSubchannelStateListener(this, subchannel, helper));
+        subchannel.start(new CustomWeightRoundSubchannelStateListener(this, subchannel, helper));
         subchannel.requestConnection();
         return subchannel;
     }
@@ -99,7 +99,7 @@ public class CustomWeightLoadBalancer extends LoadBalancer {
     @Override
     public void handleNameResolutionError(Status error) {
         log.info("命名解析失败:{}", error);
-        helper.updateBalancingState(ConnectivityState.TRANSIENT_FAILURE, new CustomWeightSubchannelPicker(PickResult.withNoResult()));
+        helper.updateBalancingState(ConnectivityState.TRANSIENT_FAILURE, new CustomWeightRoundSubchannelPicker(PickResult.withNoResult()));
     }
 
     @Override

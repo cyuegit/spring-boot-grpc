@@ -1,2 +1,4 @@
 com.xcbeyond.springboot.grpc.loadbalancer.roundrobin.CustomRoundLoadBalancerProvider
-com.xcbeyond.springboot.grpc.loadbalancer.weightrobin.CustomWeightLoadBalancerProvider
+com.xcbeyond.springboot.grpc.loadbalancer.randomrobin.CustomRandomLoadBalancerProvider
+com.xcbeyond.springboot.grpc.loadbalancer.weightroundrobin.CustomWeightRoundLoadBalancerProvider
+com.xcbeyond.springboot.grpc.loadbalancer.weightrandomrobin.CustomWeightRandomLoadBalancerProvider
