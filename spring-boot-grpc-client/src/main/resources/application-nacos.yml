@@ -31,8 +31,8 @@ grpc:
 #      defaultLoadBalancingPolicy: pick_first
 #      defaultLoadBalancingPolicy: custom_round_robin
 #      defaultLoadBalancingPolicy: custom_random_robin
-      defaultLoadBalancingPolicy: custom_weight_round_robin
-#      defaultLoadBalancingPolicy: custom_weight_random_robin
+#      defaultLoadBalancingPolicy: custom_weight_round_robin
+      defaultLoadBalancingPolicy: custom_weight_random_robin
 
 logging:
   level:

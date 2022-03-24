@@ -8,11 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.grpc.ConnectivityState.CONNECTING;
-import static io.grpc.ConnectivityState.IDLE;
-import static io.grpc.ConnectivityState.READY;
-import static io.grpc.ConnectivityState.SHUTDOWN;
-import static io.grpc.ConnectivityState.TRANSIENT_FAILURE;
+import static io.grpc.ConnectivityState.*;
 
 /**
  * @ClassName: CustomRoundSubchannelStateListener

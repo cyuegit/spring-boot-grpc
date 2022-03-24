@@ -1,8 +1,8 @@
 grpc:
   server:
-    port: 1047
+    port: 1747
 server:
-  port: 2391
+  port: 7991
 
 spring:
   application:
