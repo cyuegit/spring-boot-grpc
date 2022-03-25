@@ -16,12 +16,12 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<jackson.version>2.11.0</jackson.version>
-		<grpc.version>1.42.2</grpc.version>
-		<os.plugin.version>1.5.0.Final</os.plugin.version>
-		<protobuf.plugin.version>0.5.0</protobuf.plugin.version>
+		<jackson.version>2.13.2</jackson.version>
+		<grpc.version>1.44.1</grpc.version>
+		<os.plugin.version>1.6.2</os.plugin.version>
+		<protobuf.plugin.version>0.6.1</protobuf.plugin.version>
 		<protoc.version>3.19.2</protoc.version>
-		<grpc.netty.version>4.1.14.Final</grpc.netty.version>
+		<grpc.netty.version>4.1.74.Final</grpc.netty.version>
 	</properties>
 
 	<dependencies>
