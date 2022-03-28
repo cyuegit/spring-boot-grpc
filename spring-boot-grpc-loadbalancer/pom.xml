@@ -17,6 +17,15 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<encoding>UTF-8</encoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<grpc-spring-boot.version>2.13.1.RELEASE</grpc-spring-boot.version>
+		<lombok.version>1.18.22</lombok.version>
+		<slf4j-api.version>1.7.36</slf4j-api.version>
+		<grpc.version>1.45.0</grpc.version>
+		<guava.version>31.1-jre</guava.version>
+		<hutool.version>5.7.22</hutool.version>
 	</properties>
 
 
@@ -24,31 +33,45 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.22</version>
+			<version>${lombok.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.36</version>
+			<version>${slf4j-api.version}</version>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-api</artifactId>
-			<version>1.44.1</version>
+			<version>${grpc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-core</artifactId>
+			<version>${grpc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.devh</groupId>
+			<artifactId>grpc-common-spring-boot</artifactId>
+			<version>${grpc-spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
-			<version>5.7.22</version>
+			<version>${hutool.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>31.1-jre</version>
+			<version>${guava.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

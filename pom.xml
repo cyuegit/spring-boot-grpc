@@ -15,33 +15,25 @@
 		<module>spring-boot-grpc-server</module>
         <module>spring-boot-grpc-client</module>
 		<module>spring-boot-grpc-loadbalancer</module>
-		<module>spring-boot-eureka-server</module>
+		<!--<module>spring-boot-eureka-server</module>-->
 	</modules>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-boot.version>2.6.3</spring-boot.version>
-		<alibaba-cloud.version>2021.0.1.0</alibaba-cloud.version>
-		<springcloud.version>2021.0.1</springcloud.version>
 		<encoding>UTF-8</encoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<spring-boot.version>2.6.3</spring-boot.version>
+		<alibaba-cloud.version>2021.0.1.0</alibaba-cloud.version>
+		<springcloud.version>2021.0.1</springcloud.version>
 	</properties>
 
 
 	<dependencyManagement>
 		<dependencies>
-			<!--<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>-->
-
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-parent</artifactId>
+				<artifactId>spring-boot-dependencies</artifactId>
 				<version>${spring-boot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
@@ -68,9 +60,9 @@
 	</dependencyManagement>
 	<repositories>
 		<repository>
-			<id>nexus-aliyun</id>
+			<id>aliyun</id>
 			<name>Nexus aliyun</name>
-			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+			<url>https://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 

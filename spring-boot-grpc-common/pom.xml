@@ -16,12 +16,15 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<encoding>UTF-8</encoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<jackson.version>2.13.2</jackson.version>
-		<grpc.version>1.44.1</grpc.version>
+		<grpc.version>1.45.0</grpc.version>
 		<os.plugin.version>1.6.2</os.plugin.version>
 		<protobuf.plugin.version>0.6.1</protobuf.plugin.version>
 		<protoc.version>3.19.2</protoc.version>
-		<grpc.netty.version>4.1.74.Final</grpc.netty.version>
+		<grpc.netty.version>4.1.75.Final</grpc.netty.version>
 	</properties>
 
 	<dependencies>
@@ -62,7 +65,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
+			<version>2.13.2.1</version>
 		</dependency>
 	</dependencies>
 
