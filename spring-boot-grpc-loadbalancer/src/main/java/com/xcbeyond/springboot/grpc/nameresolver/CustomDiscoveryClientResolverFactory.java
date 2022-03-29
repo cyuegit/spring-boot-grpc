@@ -121,7 +121,7 @@ public class CustomDiscoveryClientResolverFactory extends NameResolverProvider {
 
     @Override
     public String toString() {
-        return "DiscoveryClientResolverFactory [scheme=" + getDefaultScheme() +
+        return "CustomDiscoveryClientResolverFactory [scheme=" + getDefaultScheme() +
                 ", discoveryClient=" + this.client + "]";
     }
 

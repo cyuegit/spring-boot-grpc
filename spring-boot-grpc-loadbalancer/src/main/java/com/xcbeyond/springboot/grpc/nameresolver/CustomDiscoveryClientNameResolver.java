@@ -30,7 +30,7 @@ import io.grpc.internal.SharedResourceHolder;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * The DiscoveryClientNameResolver resolves the service hosts and their associated gRPC port using the channel's name
+ * The CustomDiscoveryClientNameResolver resolves the service hosts and their associated gRPC port using the channel's name
  * and spring's cloud {@link DiscoveryClient}. The ports are extracted from the {@code gRPC_port} metadata.
  */
 @Slf4j
@@ -56,7 +56,7 @@ public class CustomDiscoveryClientNameResolver extends NameResolver {
     private List<ServiceInstance> instanceList = Lists.newArrayList();
 
     /**
-     * Creates a new DiscoveryClientNameResolver.
+     * Creates a new CustomDiscoveryClientNameResolver.
      *
      * @param name The name of the service to look up.
      * @param client The client used to look up the service addresses.
@@ -232,7 +232,7 @@ public class CustomDiscoveryClientNameResolver extends NameResolver {
 
     @Override
     public String toString() {
-        return "DiscoveryClientNameResolver [name=" + this.name + ", discoveryClient=" + this.client + "]";
+        return "CustomDiscoveryClientNameResolver [name=" + this.name + ", discoveryClient=" + this.client + "]";
     }
 
     /**

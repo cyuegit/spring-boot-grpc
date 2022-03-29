@@ -1,10 +1,13 @@
 package com.xcbeyond.springboot.grpc.client;
 
+import net.devh.boot.grpc.client.autoconfigure.GrpcDiscoveryClientAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+		GrpcDiscoveryClientAutoConfiguration.class
+})
 //@EnableEurekaClient
 //@EnableDiscoveryClient
 public class SpringBootGrpcClientApplication {
