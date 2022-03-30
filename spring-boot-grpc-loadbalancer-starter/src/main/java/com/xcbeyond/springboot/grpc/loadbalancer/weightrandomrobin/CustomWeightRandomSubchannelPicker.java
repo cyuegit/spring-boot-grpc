@@ -43,6 +43,7 @@ class CustomWeightRandomSubchannelPicker extends LoadBalancer.SubchannelPicker {
     public CustomWeightRandomSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
         if (subchannelList.size() == 1) {
             this.weightSubchannelList = subchannelList;
+            log.info("weightSubchannelList size:{}", weightSubchannelList.size());
             return;
         }
         //extracted(subchannelList);

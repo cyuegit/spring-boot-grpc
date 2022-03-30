@@ -34,7 +34,6 @@ public class CustomWeightRandomLoadBalancer extends LoadBalancer {
     @Override
     public void handleResolvedAddresses(ResolvedAddresses resolvedAddresses) {
         log.info("处理地址:{}", resolvedAddresses.getAddresses().toString());
-
         // 将解析的地址分割成单个 Address
         List<EquivalentAddressGroup> latestAddresses = resolvedAddresses.getAddresses()
                 .stream()

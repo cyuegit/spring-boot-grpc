@@ -40,7 +40,7 @@ class CustomWeightRoundSubchannelStateListener implements LoadBalancer.Subchanne
 
         if (newState == SHUTDOWN) {
             log.info("关闭 {}", subchannel);
-            return;
+            //return;
         }
 
         if (newState == READY) {
@@ -50,7 +50,7 @@ class CustomWeightRoundSubchannelStateListener implements LoadBalancer.Subchanne
         if (currentState == TRANSIENT_FAILURE) {
             if (newState == CONNECTING || newState == IDLE) {
                 log.info("{} 建立连接或者失败", subchannel);
-                return;
+                //return;
             }
         }
 

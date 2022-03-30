@@ -27,6 +27,7 @@ class CustomRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     public CustomRoundSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
         this.subchannelList = subchannelList;
+        log.info("subchannelList size:{}", subchannelList.size());
     }
 
     @Override
@@ -41,6 +42,7 @@ class CustomRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
     }
 
     private LoadBalancer.PickResult nextSubchannel(LoadBalancer.PickSubchannelArgs args) {
+        log.info("nextSubchannel size:{}", subchannelList.size());
         if (index.get() >= subchannelList.size()) {
             index.set(0);
         }

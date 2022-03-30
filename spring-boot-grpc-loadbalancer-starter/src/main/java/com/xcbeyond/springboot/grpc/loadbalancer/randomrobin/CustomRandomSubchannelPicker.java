@@ -28,6 +28,7 @@ class CustomRandomSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     public CustomRandomSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
         this.subchannelList = subchannelList;
+        log.info("subchannelList size:{}", subchannelList.size());
     }
 
     @Override
@@ -43,6 +44,7 @@ class CustomRandomSubchannelPicker extends LoadBalancer.SubchannelPicker {
 
     private LoadBalancer.PickResult nextSubchannel(LoadBalancer.PickSubchannelArgs args) {
         // com.alibaba.nacos.client.naming.utils.Chooser 参考 ThreadLocalRandom.current().nextInt(10)
+        log.info("nextSubchannel size:{}", subchannelList.size());
         if (subchannelList.size() == 1) {
             return LoadBalancer.PickResult.withSubchannel(subchannelList.get(0));
         }

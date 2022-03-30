@@ -44,6 +44,7 @@ class CustomWeightRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
     public CustomWeightRoundSubchannelPicker(List<LoadBalancer.Subchannel> subchannelList) {
         if (subchannelList.size() == 1) {
             this.weightSubchannelList = subchannelList;
+            log.info("weightSubchannelList size:{}", weightSubchannelList.size());
             return;
         }
         //extracted(subchannelList);
@@ -62,6 +63,7 @@ class CustomWeightRoundSubchannelPicker extends LoadBalancer.SubchannelPicker {
     }
 
     private LoadBalancer.PickResult nextSubchannel(LoadBalancer.PickSubchannelArgs args) {
+        log.info("nextSubchannel size:{}", weightSubchannelList.size());
         if (weightSubchannelList.size() == 1) {
             log.info("only one Subchannel");
             return LoadBalancer.PickResult.withSubchannel(weightSubchannelList.get(0));
