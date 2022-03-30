@@ -30,7 +30,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.xcbeyond.springboot.grpc.loadbalancer</groupId>
-			<artifactId>spring-boot-grpc-loadbalancer</artifactId>
+			<artifactId>spring-boot-grpc-loadbalancer-starter</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
